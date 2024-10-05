@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+html, body {
+    height: 100%; /* Ensure html and body take full height */
+    margin: 0;    /* Remove default margin */
+}
+
+body {
+    font-family: "Verdana";
+    font-size: 2em;
+}
+
+body::before {
+    content: ""; /* Necessary to display the pseudo-element */
+    position: fixed; /* Fixed position to cover the entire screen */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("https://i.pinimg.com/564x/90/16/44/9016443a6143ec0df1795bbabd8bc433.jpg");
+    filter: blur(8px); /* Apply a blur effect */
+    z-index: -1; /* Ensure it stays below other content */
+}
+
+.content {
+    position: relative; /* Position the content above the background */
+    z-index: 1; /* Bring the content on top */
+    color: white; /* Ensure text is readable against the blurred background */
+}
+        h1 {
+            color: white;
+        }
+        p {
+            color: white;
+        }
+        .graph {
+            border-radius: 8px;
+        }
+        .button-64 {
+        align-items: center;
+        background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+        border: 0;
+        border-radius: 8px;
+        box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        display: flex;
+        font-family: Phantomsans, sans-serif;
+        font-size: 20px;
+        justify-content: center;
+        line-height: 0.5em;
+        max-width: 100%;
+        min-width: 140px;
+        padding: 3px;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+        cursor: pointer;
+        }
+
+        .button-64:active,
+        .button-64:hover {
+        outline: 0;
+        }
+
+        .button-64 span {
+        background-color: rgb(5, 6, 45);
+        padding: 16px 24px;
+        border-radius: 6px;
+        width: 100%;
+        height: 80%;
+        transition: 300ms;
+        }
+
+        .button-64:hover span {
+        background: none;
+        }
+
+        @media (min-width: 768px) {
+        .button-64 {
+            font-size: 24px;
+            min-width: 196px;
+            }
+        }
+        textarea {
+        resize: none;
+        }
+        .input-container{
+	        position:relative;
+	        margin-bottom:25px;
+        }
+        .input-container input{
+        border:0;
+        border-bottom:1px solid #555;
+        background:#ffffff55;
+        border-radius: 5px;
+        width:50%;
+        padding:8px 0 5px 0;
+        font-size:16px;
+        color:#fff;
+        }
+        .input-container input:focus{
+        border:none;
+        outline:none;
+        border-bottom:1px solid #5e00ff;
+        }
+        .input-container input::placeholder {
+            color: #ffffff; /* Change the placeholder color to white */
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h2>Hiiiiiii <<:3</h2>
+        <form action="/submit" method="post">
+            <p>{{ticker}}</p>
+                <span class="input-container">
+                    <input type="text" name="input_text" placeholder="Введи норм тикер">
+                </span>
+            <p>{{ticker2}}</p>
+                <span class="input-container">
+                    <input type="text" name="input_crypto" placeholder="Введи норм крипто">
+                </span>
+            <p>
+                <button class="button-64" role="button" type="submit"><span class="text">check</span></button>
+            </p>
+        </form>
+
+        <div id="graph"></div>
+    </div>
+
+        <script>
+            var graphJson = {{ graph_json|safe }};
+            if (graphJson) {
+                var figure = graphJson;
+                Plotly.newPlot('graph', figure.data, figure.layout);
+            }
+        </script>
+</body>
+
+</html>
